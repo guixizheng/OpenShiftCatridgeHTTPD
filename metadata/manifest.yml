@@ -16,6 +16,9 @@ Provides:
 Group-Overrides:
   - components:
     - httpd
+Scaling:
+  Min: 1
+  Max: 3
 Subscribes:
   set-db-connection-info:
     Type: "NET_TCP:db:connection-info"
