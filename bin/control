@@ -1,7 +1,4 @@
-#!/bin/bash -e
-
-PATH=/bin/:/usr/bin:$PATH
-
+#!/bin/bash
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 function start {
@@ -33,5 +30,3 @@ case "$1" in
   post-deploy) catchall ;;
   *)           exit 0
 esac
-
-exit 0
