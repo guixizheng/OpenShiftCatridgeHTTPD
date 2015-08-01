@@ -2,6 +2,7 @@
 Name: diy
 Cartridge-Short-Name: DIY
 Display-Name: Do-It-Yourself 0.1
+Source-Url: https://github.com/guixizheng/OpenShiftCatridgeHTTPD.git
 Description: The Do-It-Yourself (DIY) application type is a blank slate for trying
   unsupported languages, frameworks, and middleware on OpenShift. See the community
   site for examples of bringing your favorite framework to OpenShift.
