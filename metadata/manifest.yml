@@ -1,8 +1,8 @@
 Name: httpd
 Cartridge-Short-Name: HTTPD
 Display-Name: HTTPD Cartridge
-Source-Url: https://github.com/guixizheng/OpenShiftCatridgeHTTPD.git
-Description: "A httpd cartridge for development use only."
+Source-Url: https://github.com/mmcgrath-openshift/httpd-example.git
+Description: "A httpd cartridge for no-gzip"
 Version: '0.1'
 License: "None"
 Vendor: Custom Cartridges INC
@@ -13,10 +13,6 @@ Categories:
   - web_framework
 Provides:
   - httpd
-Cart-Data:
-  - Key: OPENSHIFT_HTTPD_EXAMPLE
-    Type: environment
-    Description: "An example environment variable using ERB processing"
 Group-Overrides:
   - components:
     - httpd
@@ -24,6 +20,9 @@ Subscribes:
   set-db-connection-info:
     Type: "NET_TCP:db:connection-info"
     Required: false
+Scaling:
+  Min: 1
+  Max: 3
 Endpoints:
   - Private-IP-Name:   IP
     Private-Port-Name: PORT
