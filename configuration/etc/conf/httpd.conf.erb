@@ -169,7 +169,7 @@ LoadModule env_module modules/mod_env.so
 LoadModule ext_filter_module modules/mod_ext_filter.so
 LoadModule mime_magic_module modules/mod_mime_magic.so
 LoadModule expires_module modules/mod_expires.so
-LoadModule deflate_module modules/mod_deflate.so
+#LoadModule deflate_module modules/mod_deflate.so
 LoadModule headers_module modules/mod_headers.so
 LoadModule usertrack_module modules/mod_usertrack.so
 LoadModule setenvif_module modules/mod_setenvif.so
@@ -239,8 +239,8 @@ LoadModule version_module modules/mod_version.so
 #  when the value of (unsigned)Group is above 60000; 
 #  don't use Group #-1 on these systems!
 #
-User apache
-Group apache
+User 55bb531689f5cf63bf0000d9
+Group 55bb531689f5cf63bf0000d9
 
 ### Section 2: 'Main' server configuration
 #
@@ -259,7 +259,7 @@ Group apache
 # e-mailed.  This address appears on some server-generated pages, such
 # as error documents.  e.g. admin@your-domain.com
 #
-ServerAdmin root@localhost
+ServerAdmin xingchaobai@gmail.com
 
 #
 # ServerName gives the name and port that the server uses to identify itself.
@@ -289,7 +289,7 @@ UseCanonicalName Off
 # documents. By default, all requests are taken from this directory, but
 # symbolic links and aliases may be used to point to other locations.
 #
-DocumentRoot "<%= ENV['OPENSHIFT_REPO_DIR'] %>"
+DocumentRoot "<%= ENV['OPENSHIFT_REPO_DIR'] %>/servroot"
 
 #
 # Each directory to which Apache has access can be configured with respect
@@ -314,7 +314,7 @@ DocumentRoot "<%= ENV['OPENSHIFT_REPO_DIR'] %>"
 #
 # This should be changed to whatever you set DocumentRoot to.
 #
-<Directory "/var/www/html">
+<Directory "<%= ENV['OPENSHIFT_REPO_DIR'] %>/servroot">
 
 #
 # Possible values for the Options directive are "None", "All",
@@ -399,7 +399,7 @@ DocumentRoot "<%= ENV['OPENSHIFT_REPO_DIR'] %>"
 # negotiated documents.  The MultiViews Option can be used for the 
 # same purpose, but it is much slower.
 #
-DirectoryIndex index.html index.html.var
+DirectoryIndex index.html
 
 #
 # AccessFileName: The name of the file to look for in each directory
@@ -441,8 +441,8 @@ DefaultType text/plain
 # directive tells the module where the hint definitions are located.
 #
 <IfModule mod_mime_magic.c>
-#   MIMEMagicFile /usr/share/magic.mime
-    MIMEMagicFile conf/magic
+    MIMEMagicFile /usr/share/magic.mime
+#   MIMEMagicFile conf/magic
 </IfModule>
 
 #
@@ -548,14 +548,14 @@ ServerSignature On
 # We include the /icons/ alias for FancyIndexed directory listings.  If you
 # do not use FancyIndexing, you may comment this out.
 #
-Alias /icons/ "/var/www/icons/"
+#Alias /icons/ "/var/www/icons/"
 
-<Directory "/var/www/icons">
-    Options Indexes MultiViews FollowSymLinks
-    AllowOverride None
-    Order allow,deny
-    Allow from all
-</Directory>
+#<Directory "/var/www/icons">
+#    Options Indexes MultiViews FollowSymLinks
+#    AllowOverride None
+#    Order allow,deny
+#    Allow from all
+#</Directory>
 
 #
 # WebDAV module configuration section.
@@ -573,18 +573,18 @@ Alias /icons/ "/var/www/icons/"
 # The same rules about trailing "/" apply to ScriptAlias directives as to
 # Alias.
 #
-ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
+#ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
 
 #
 # "/var/www/cgi-bin" should be changed to whatever your ScriptAliased
 # CGI directory exists, if you have that configured.
 #
-<Directory "/var/www/cgi-bin">
-    AllowOverride None
-    Options None
-    Order allow,deny
-    Allow from all
-</Directory>
+#<Directory "/var/www/cgi-bin">
+#    AllowOverride None
+#    Options None
+#    Order allow,deny
+#    Allow from all
+#</Directory>
 
 #
 # Redirect allows you to tell clients about documents which used to exist in
@@ -601,47 +601,47 @@ ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
 # IndexOptions: Controls the appearance of server-generated directory
 # listings.
 #
-IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
+#IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
 
 #
 # AddIcon* directives tell the server which icon to show for different
 # files or filename extensions.  These are only displayed for
 # FancyIndexed directories.
 #
-AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip
+#AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip
 
-AddIconByType (TXT,/icons/text.gif) text/*
-AddIconByType (IMG,/icons/image2.gif) image/*
-AddIconByType (SND,/icons/sound2.gif) audio/*
-AddIconByType (VID,/icons/movie.gif) video/*
+#AddIconByType (TXT,/icons/text.gif) text/*
+#AddIconByType (IMG,/icons/image2.gif) image/*
+#AddIconByType (SND,/icons/sound2.gif) audio/*
+#AddIconByType (VID,/icons/movie.gif) video/*
 
-AddIcon /icons/binary.gif .bin .exe
-AddIcon /icons/binhex.gif .hqx
-AddIcon /icons/tar.gif .tar
-AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv
-AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip
-AddIcon /icons/a.gif .ps .ai .eps
-AddIcon /icons/layout.gif .html .shtml .htm .pdf
-AddIcon /icons/text.gif .txt
-AddIcon /icons/c.gif .c
-AddIcon /icons/p.gif .pl .py
-AddIcon /icons/f.gif .for
-AddIcon /icons/dvi.gif .dvi
-AddIcon /icons/uuencoded.gif .uu
-AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl
-AddIcon /icons/tex.gif .tex
-AddIcon /icons/bomb.gif core
+#AddIcon /icons/binary.gif .bin .exe
+#AddIcon /icons/binhex.gif .hqx
+#AddIcon /icons/tar.gif .tar
+#AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv
+#AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip
+#AddIcon /icons/a.gif .ps .ai .eps
+#AddIcon /icons/layout.gif .html .shtml .htm .pdf
+#AddIcon /icons/text.gif .txt
+#AddIcon /icons/c.gif .c
+#AddIcon /icons/p.gif .pl .py
+#AddIcon /icons/f.gif .for
+#AddIcon /icons/dvi.gif .dvi
+#AddIcon /icons/uuencoded.gif .uu
+#AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl
+#AddIcon /icons/tex.gif .tex
+#AddIcon /icons/bomb.gif core
 
-AddIcon /icons/back.gif ..
-AddIcon /icons/hand.right.gif README
-AddIcon /icons/folder.gif ^^DIRECTORY^^
-AddIcon /icons/blank.gif ^^BLANKICON^^
+#AddIcon /icons/back.gif ..
+#AddIcon /icons/hand.right.gif README
+#AddIcon /icons/folder.gif ^^DIRECTORY^^
+#AddIcon /icons/blank.gif ^^BLANKICON^^
 
 #
 # DefaultIcon is which icon to show for files which do not have an icon
 # explicitly set.
 #
-DefaultIcon /icons/unknown.gif
+#DefaultIcon /icons/unknown.gif
 
 #
 # AddDescription allows you to place a short description after a file in
@@ -659,14 +659,14 @@ DefaultIcon /icons/unknown.gif
 #
 # HeaderName is the name of a file which should be prepended to
 # directory indexes. 
-ReadmeName README.html
-HeaderName HEADER.html
+#ReadmeName README.html
+#HeaderName HEADER.html
 
 #
 # IndexIgnore is a set of filenames which directory indexing should ignore
 # and not include in the listing.  Shell-style wildcarding is permitted.
 #
-IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
+#IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
 
 #
 # DefaultLanguage and AddLanguage allows you to specify the language of 
@@ -706,32 +706,32 @@ IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
 # Brazilian Portuguese (pt-BR) - Russian (ru) - Swedish (sv)
 # Simplified Chinese (zh-CN) - Spanish (es) - Traditional Chinese (zh-TW)
 #
-AddLanguage ca .ca
-AddLanguage cs .cz .cs
-AddLanguage da .dk
-AddLanguage de .de
-AddLanguage el .el
-AddLanguage en .en
-AddLanguage eo .eo
-AddLanguage es .es
-AddLanguage et .et
-AddLanguage fr .fr
-AddLanguage he .he
-AddLanguage hr .hr
-AddLanguage it .it
-AddLanguage ja .ja
-AddLanguage ko .ko
-AddLanguage ltz .ltz
-AddLanguage nl .nl
-AddLanguage nn .nn
-AddLanguage no .no
-AddLanguage pl .po
-AddLanguage pt .pt
-AddLanguage pt-BR .pt-br
-AddLanguage ru .ru
-AddLanguage sv .sv
-AddLanguage zh-CN .zh-cn
-AddLanguage zh-TW .zh-tw
+#AddLanguage ca .ca
+#AddLanguage cs .cz .cs
+#AddLanguage da .dk
+#AddLanguage de .de
+#AddLanguage el .el
+#AddLanguage en .en
+#AddLanguage eo .eo
+#AddLanguage es .es
+#AddLanguage et .et
+#AddLanguage fr .fr
+#AddLanguage he .he
+#AddLanguage hr .hr
+#AddLanguage it .it
+#AddLanguage ja .ja
+#AddLanguage ko .ko
+#AddLanguage ltz .ltz
+#AddLanguage nl .nl
+#AddLanguage nn .nn
+#AddLanguage no .no
+#AddLanguage pl .po
+#AddLanguage pt .pt
+#AddLanguage pt-BR .pt-br
+#AddLanguage ru .ru
+#AddLanguage sv .sv
+#AddLanguage zh-CN .zh-cn
+#AddLanguage zh-TW .zh-tw
 
 #
 # LanguagePriority allows you to give precedence to some languages
@@ -740,14 +740,14 @@ AddLanguage zh-TW .zh-tw
 # Just list the languages in decreasing order of preference. We have
 # more or less alphabetized them here. You probably want to change this.
 #
-LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv zh-CN zh-TW
+#LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv zh-CN zh-TW
 
 #
 # ForceLanguagePriority allows you to serve a result page rather than
 # MULTIPLE CHOICES (Prefer) [in case of a tie] or NOT ACCEPTABLE (Fallback)
 # [in case no accepted languages matched the available variants]
 #
-ForceLanguagePriority Prefer Fallback
+#ForceLanguagePriority Prefer Fallback
 
 #
 # Specify a default charset for all content served; this enables
@@ -776,14 +776,14 @@ AddDefaultCharset UTF-8
 # If the AddEncoding directives above are commented-out, then you
 # probably should define those extensions to indicate media types:
 #
-AddType application/x-compress .Z
-AddType application/x-gzip .gz .tgz
+#AddType application/x-compress .Z
+#AddType application/x-gzip .gz .tgz
 
 #
 #   MIME-types for downloading Certificates and CRLs
 #
-AddType application/x-x509-ca-cert .crt
-AddType application/x-pkcs7-crl    .crl
+#AddType application/x-x509-ca-cert .crt
+#AddType application/x-pkcs7-crl    .crl
 
 #
 # AddHandler allows you to map certain file extensions to "handlers":
@@ -805,7 +805,7 @@ AddType application/x-pkcs7-crl    .crl
 # (This is enabled by default to allow the Apache "It Worked" page
 #  to be distributed in multiple languages.)
 #
-AddHandler type-map var
+#AddHandler type-map var
 
 #
 # Filters allow you to process content before it is sent to the client.
@@ -813,8 +813,8 @@ AddHandler type-map var
 # To parse .shtml files for server-side includes (SSI):
 # (You will also need to add "Includes" to the "Options" directive.)
 #
-AddType text/html .shtml
-AddOutputFilter INCLUDES .shtml
+#AddType text/html .shtml
+#AddOutputFilter INCLUDES .shtml
 
 #
 # Action lets you define media types that will execute a script whenever
@@ -852,20 +852,20 @@ AddOutputFilter INCLUDES .shtml
 # copying them to /your/include/path/, even on a per-VirtualHost basis.
 #
 
-Alias /error/ "/var/www/error/"
+#Alias /error/ "/var/www/error/"
 
-<IfModule mod_negotiation.c>
-<IfModule mod_include.c>
-    <Directory "/var/www/error">
-        AllowOverride None
-        Options IncludesNoExec
-        AddOutputFilter Includes html
-        AddHandler type-map var
-        Order allow,deny
-        Allow from all
-        LanguagePriority en es de fr
-        ForceLanguagePriority Prefer Fallback
-    </Directory>
+#<IfModule mod_negotiation.c>
+#<IfModule mod_include.c>
+#    <Directory "/var/www/error">
+#        AllowOverride None
+#        Options IncludesNoExec
+#        AddOutputFilter Includes html
+#        AddHandler type-map var
+#        Order allow,deny
+#        Allow from all
+#        LanguagePriority en es de fr
+#        ForceLanguagePriority Prefer Fallback
+#    </Directory>
 
 #    ErrorDocument 400 /error/HTTP_BAD_REQUEST.html.var
 #    ErrorDocument 401 /error/HTTP_UNAUTHORIZED.html.var
@@ -885,8 +885,8 @@ Alias /error/ "/var/www/error/"
 #    ErrorDocument 503 /error/HTTP_SERVICE_UNAVAILABLE.html.var
 #    ErrorDocument 506 /error/HTTP_VARIANT_ALSO_VARIES.html.var
 
-</IfModule>
-</IfModule>
+#</IfModule>
+#</IfModule>
 
 #
 # The following directives modify normal HTTP response behavior to
