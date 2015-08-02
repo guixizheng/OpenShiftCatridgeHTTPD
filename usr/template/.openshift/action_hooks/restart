@@ -1,0 +1,1 @@
+httpd -f $OPENSHIFT_HTTPD_DIR/conf/httpd.conf -k restart

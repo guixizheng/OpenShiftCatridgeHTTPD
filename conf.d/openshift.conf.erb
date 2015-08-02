@@ -1,0 +1,11 @@
+ServerRoot "<%= ENV['OPENSHIFT_HTTPD_DIR'] %>"
+DocumentRoot "<%= "#{ENV['OPENSHIFT_REPO_DIR']}/httpd" %>"
+Listen <%= "#{ENV['OPENSHIFT_HTTPD_IP']}:#{ENV['OPENSHIFT_HTTPD_PORT']}" %>
+User <%= ENV['OPENSHIFT_GEAR_UUID'] %>
+Group <%= ENV['OPENSHIFT_GEAR_UUID'] %>
+ErrorLog "<%= "|/usr/sbin/rotatelogs #{ENV['OPENSHIFT_HTTPD_DIR']}/logs/error_log-%Y%m%d-%H%M%S-%Z 86400" %>"
+CustomLog "<%= "|/usr/sbin/rotatelogs #{ENV['OPENSHIFT_HTTPD_DIR']}/logs/access_log-%Y%m%d-%H%M%S-%Z 86400" %>" combined
+
+<Directory "<%= "#{ENV['OPENSHIFT_REPO_DIR']}/httpd" %>">
+  AllowOverride All
+</Directory>
