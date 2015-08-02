@@ -1,1 +1,1 @@
-httpd -f $OPENSHIFT_HTTPD_DIR/configuration/etc/conf/httpd.conf -k stop
+httpd -f $OPENSHIFT_HTTPD_DIR/conf/httpd.conf -k stop

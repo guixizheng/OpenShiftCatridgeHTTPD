@@ -169,7 +169,7 @@ LoadModule env_module modules/mod_env.so
 LoadModule ext_filter_module modules/mod_ext_filter.so
 LoadModule mime_magic_module modules/mod_mime_magic.so
 LoadModule expires_module modules/mod_expires.so
-#LoadModule deflate_module modules/mod_deflate.so
+LoadModule deflate_module modules/mod_deflate.so
 LoadModule headers_module modules/mod_headers.so
 LoadModule usertrack_module modules/mod_usertrack.so
 LoadModule setenvif_module modules/mod_setenvif.so
@@ -441,8 +441,8 @@ DefaultType text/plain
 # directive tells the module where the hint definitions are located.
 #
 <IfModule mod_mime_magic.c>
-    MIMEMagicFile /usr/share/magic.mime
-#   MIMEMagicFile conf/magic
+#  MIMEMagicFile /usr/share/magic.mime
+   MIMEMagicFile conf/magic
 </IfModule>
 
 #
